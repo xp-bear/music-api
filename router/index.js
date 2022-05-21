@@ -19,7 +19,7 @@ module.exports = function (app) {
     res.redirect("/home");
   });
   app.get("/home", (req, res) => {
-    res.send("首页");
+    res.send("后端接口API启动成功!");
   });
   // 邮箱验证码
   app.post("/email", (req, res) => {

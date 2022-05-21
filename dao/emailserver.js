@@ -23,8 +23,14 @@ exports.emailSignUp = function (email, res) {
     let index = Math.floor(Math.random() * str.length);
     code += str[index];
   }
-  console.log("验证码: ", code);
-
+  //对code验证码通过ASCII码加密后面随机拼接一个字符串之后 传递给前端
+  asc_code = "";
+  code.split("").forEach((item, index) => {
+    asc_code += code.charCodeAt(index) + ".";
+  });
+  asc_code += Math.floor(Math.random() * 130);
+  console.log(asc_code);
+  
   let options = {
     from: credentials.qq.user,
     to: email,
@@ -75,7 +81,7 @@ exports.emailSignUp = function (email, res) {
                     <p>此为系统邮件，请勿回复<br>
                         请保管好您的邮箱，避免账号被他人盗用
                     </p>
-                    <p>萧兮网络科技团队</p>
+                    <p>熊仔音乐网络科技团队</p>
                 </div>
             </div>
         </td>
@@ -86,6 +92,6 @@ exports.emailSignUp = function (email, res) {
   };
   Transport.sendMail(options, function (err, info) {
     if (err) return console.log(err);
-    res.send({ msg: "验证码发送到邮箱,请查收!", info_code: code });
+    res.send({ msg: "验证码发送到邮箱,请查收!", info_code: asc_code });
   });
 };
