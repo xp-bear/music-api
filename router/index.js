@@ -16,11 +16,12 @@ const { applyFriend } = require("../server/friend");
 module.exports = function (app) {
   //首页
   app.get("/", (req, res) => {
-    res.redirect("/home");
+    res.send({
+      code: 200,
+      msg: "熊仔音乐后台接口启动成功!",
+    });
   });
-  app.get("/home", (req, res) => {
-    res.send("后端接口API启动成功!");
-  });
+
   // 邮箱验证码
   app.post("/email", (req, res) => {
     let email = req.body.email;

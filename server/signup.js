@@ -11,5 +11,5 @@ exports.signUp = function (req, res) {
 exports.judgeValue = function (req, res) {
   let data = req.body.data; //具体的邮箱
   let type = req.body.type; //email
-  dbserver.countUserValue(data, (type = "email"), res);
+  dbserver.countUserValue(data, type, res);
 };

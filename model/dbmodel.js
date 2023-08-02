@@ -7,11 +7,11 @@ const UserSchema = new mongoose.Schema({
   name: { type: String }, //用户名
   psw: { type: String }, //密码
   email: { type: String }, //邮箱
-  sex: { type: String, default: "asexual" }, //性别
+  sex: { type: String, default: "female" }, //性别
   birth: { type: Date }, //生日
   phone: { type: Number }, //电话
   explain: { type: String }, //介绍
-  imgUrl: { type: String, default: "user.png" }, //用户头像
+  imgUrl: { type: String, default: "http://cdn.xxoutman.cn/avatar-1690906047011.ico?1690906047548" }, //用户头像
   signature: { type: String, default: "该用户很懒,没有写签名!" }, //用户头像
   time: { type: Date }, //注册时间
 });

@@ -39,6 +39,8 @@ app.set("view engine", "html");
 
 // 路由模块
 require("./router/index")(app);
+// 配置个人路由模块
+require("./router/seo")(app);
 
 //没有匹配到的项目==> 404页面
 app.use((req, res, next) => {
@@ -59,5 +61,5 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT, () => {
-  console.log("启动成功,端口5000");
+  console.log("启动成功,端口 http://127.0.0.1:5000");
 });

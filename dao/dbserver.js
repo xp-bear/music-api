@@ -391,4 +391,40 @@ exports.applyFriend = function (data, res) {
   });
 };
 
-//更新好友状态
+// 拓展功能
+//--------------------------------------
+// 1.查询用户信息数据
+exports.searchInfo = function (name, res) {
+  wherestr = { name: name };
+  let out = {
+    psw: 0,
+  };
+  User.find(wherestr, out, (err, result) => {
+    if (err) {
+      res.send({ msg: "搜索用户出问题", code: 500 });
+    } else {
+      // 返回的数据删除密码这个字段
+      res.send({ msg: "搜索成功", code: 200, result });
+    }
+  });
+};
+
+// 修改用户信息
+exports.updateUser = function (data, res) {
+  wherestr = { name: data.name }; //查询条件
+  console.log(data.sign);
+  // 设置要更新的字段和新值
+  const update = { $set: { name: data.newName, signature: data.sign, sex: data.sex, imgUrl: data.imgUrl } };
+
+  // 执行更新操作
+  User.updateOne(wherestr, update, (err, result) => {
+    if (err) {
+      res.send({ msg: "修改用户出问题", code: 500 });
+    }
+    res.send({
+      code: 200,
+      msg: "修改成功!",
+      result: result,
+    });
+  });
+};
