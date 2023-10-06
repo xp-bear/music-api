@@ -1,4 +1,4 @@
-const { searchInfo, updateUser } = require("../server/common");
+const { searchInfo, updateUser,searchMusic } = require("../server/common");
 const { BASEURL } = require("../config/index");
 const multer = require("multer");
 const path = require("path");
@@ -39,5 +39,10 @@ module.exports = function (app) {
   // 修改用户信息数据接口
   app.post("/updateuser", (req, res) => {
     updateUser(req, res);
+  });
+
+  // 多通道音乐接口实现
+  app.get("/search", (req, res) => {
+    searchMusic(req, res);
   });
 };

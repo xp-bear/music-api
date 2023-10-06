@@ -1,7 +1,7 @@
 const { User, Friend, Group, GroupUser, Message } = require("../model/dbmodel");
 const bcrypt = require("./bcryptjs");
 let token = require("../dao/jwt");
-
+const axios = require("axios");
 // 新建用户
 exports.buildUser = function (name, email, pwd, res) {
   // 检测邮箱不可以重复注册
@@ -425,6 +425,47 @@ exports.updateUser = function (data, res) {
       code: 200,
       msg: "修改成功!",
       result: result,
+    });
+  });
+};
+
+// 多通道音乐接口实现
+exports.searchMusic = function (data, res) {
+  let name = data.name; //搜索的歌曲名称
+
+  const referer = "https://bailemi.com/"; // 设置引荐页面的 URL
+  // 创建 Axios 请求配置对象
+  const axiosConfig = {
+    headers: {
+      Referer: referer,
+    },
+  };
+
+  // 使用 Axios 发起请求，并传入配置对象
+  axios.get(`https://bailemi.com/dance/search?type=&key=${name}`, axiosConfig).then((result) => {
+    // 根据result的结果提取歌曲id值
+    const pattern = /<input type=checkbox  checked  name=\\\"checkd\\\" value=\\\"(.*?)\\\" checked=\\\"checked\\\" class=\\\"xuan\\\">/g; // 匹配所有数字
+    const matches = JSON.stringify(result.data).match(pattern) || [];
+    if (matches.length == 0) {
+      res.send({
+        code: 200,
+        msg: "暂无数据",
+      });
+    }
+    let musicArr = []; //所有音乐数据
+    matches.forEach(async (item, index) => {
+      let number = parseInt(item.match(/\d+/g)[0]); //单个音乐id , 再次发起请求，拿到对应的数据。
+      await axios.get(`https://bailemi.com/dance/Playsong/data?id=${number}`, axiosConfig).then((mdata) => {
+        musicArr.push(mdata.data[0]);
+      });
+      // 获取到所有的歌曲数据
+      if (index == matches.length - 1) {
+        res.send({
+          code: 200,
+          msg: "歌曲搜索成功!",
+          result: musicArr,
+        });
+      }
     });
   });
 };
