@@ -7,7 +7,7 @@ const jwt = require("./dao/jwt");
 
 // 实例化
 const app = express();
-const PORT = 5000;
+const PORT = 5002;
 // 设置跨域请求
 app.use(cors());
 
@@ -61,5 +61,5 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT, () => {
-  console.log("启动成功,端口 http://127.0.0.1:5000");
+  console.log("启动成功,端口 http://127.0.0.1:5002");
 });

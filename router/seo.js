@@ -1,6 +1,7 @@
-const { searchInfo, updateUser,searchMusic } = require("../server/common");
+const { searchInfo, updateUser, searchMusic } = require("../server/common");
 const { BASEURL } = require("../config/index");
 const multer = require("multer");
+const fs = require("fs");
 const path = require("path");
 module.exports = function (app) {
   //查询用户表数据
@@ -10,6 +11,7 @@ module.exports = function (app) {
 
   // 上传图片到服务器
   let filename = ""; //图片名称
+
   // 设置文件上传存储配置
   const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -21,6 +23,8 @@ module.exports = function (app) {
       cb(null, filename);
     },
   });
+  const folderPath = path.join(__dirname, "views", "uploads");
+  console.log(folderPath);
 
   const upload = multer({ storage: storage });
   // 设置路由处理文件上传
