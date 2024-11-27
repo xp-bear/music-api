@@ -30,7 +30,7 @@ exports.emailSignUp = function (email, res) {
   });
   asc_code += Math.floor(Math.random() * 130);
   console.log(asc_code);
-  
+
   let options = {
     from: credentials.qq.user,
     to: email,

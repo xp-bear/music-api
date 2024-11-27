@@ -11,7 +11,7 @@ const UserSchema = new mongoose.Schema({
   birth: { type: Date }, //生日
   phone: { type: Number }, //电话
   explain: { type: String }, //介绍
-  imgUrl: { type: String, default: "http://cdn.xxoutman.cn/avatar-1690906047011.ico?1690906047548" }, //用户头像
+  imgUrl: { type: String, default: "https://xp-cdn-oss.oss-cn-wuhan-lr.aliyuncs.com/common/default_avatar.png" }, //用户头像
   signature: { type: String, default: "该用户很懒,没有写签名!" }, //用户头像
   time: { type: Date }, //注册时间
 });
