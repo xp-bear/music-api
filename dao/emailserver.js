@@ -17,7 +17,7 @@ let Transport = nodemailer.createTransport({
 // 注册发送邮件给用户
 exports.emailSignUp = function (email, res) {
   console.log(email);
-  let str = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  let str = "0123456789";
   let code = ""; //存放验证码
   for (let i = 0; i < 5; i++) {
     let index = Math.floor(Math.random() * str.length);
