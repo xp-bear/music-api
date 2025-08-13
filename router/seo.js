@@ -24,7 +24,7 @@ module.exports = function (app) {
     },
   });
   const folderPath = path.join(__dirname, "views", "uploads");
-  console.log(folderPath);
+  // console.log(folderPath);
 
   const upload = multer({ storage: storage });
   // 设置路由处理文件上传
