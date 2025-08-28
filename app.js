@@ -4,6 +4,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const ejs = require("ejs"); // 配置Express 视图引擎
 const jwt = require("./dao/jwt");
+const miguSearchRouter = require("./router/proxy");
 
 // 实例化
 const app = express();
@@ -36,6 +37,8 @@ app.set("view engine", "html");
 //     next();
 //   }
 // });
+// 配置咪咕搜索接口代理
+app.use("/api", miguSearchRouter);
 
 // 路由模块
 require("./router/index")(app);
